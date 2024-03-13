@@ -1,8 +1,8 @@
 import { AddIcon } from "@chakra-ui/icons";
 import { IconButton, Button, Modal, ModalContent, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, FormControl, FormLabel, Input, ColorProps } from "@chakra-ui/react";
-import React, { Dispatch, PropsWithRef, SetStateAction, useId, useState } from "react";
+import React, { Dispatch, EventHandler, PropsWithRef, SetStateAction, useId, useState } from "react";
 
-export default function BasicModel( { input }: { input: { value: string; }[]}, {setInput} : {setInput: React.SetStateAction<{value: string;}[]>}) {
+export default function BasicModel(  {input} : {input : Array<string>}, { onClick }: { onClick? : React.MouseEventHandler }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const initialRef = React.useRef(null)
     const finalRef = React.useRef(null)
@@ -30,7 +30,7 @@ export default function BasicModel( { input }: { input: { value: string; }[]}, {
             </ModalBody>
   
             <ModalFooter>
-              <Button colorScheme='blue' mr={3} onClick={()=> setInput((input: String[]) => [...input, { value: value }])}>
+              <Button colorScheme='blue' mr={3} onClick={()=> onClick}>
                 Save
               </Button>
               <Button onClick={onClose}>Cancel</Button>
