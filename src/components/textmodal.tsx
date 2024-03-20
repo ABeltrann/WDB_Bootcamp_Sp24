@@ -8,7 +8,6 @@ export default function TextModal({text }: {text : String}) {
     const initialRef = React.useRef(null)
     const finalRef = React.useRef(null)
     const [value, setValue] = React.useState('')
-    const handleChange = (event:any) => setValue(event.target.value)
     
     function LimitString(total : String, limit : number){
       let returnString = ''
