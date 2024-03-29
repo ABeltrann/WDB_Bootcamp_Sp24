@@ -10,6 +10,7 @@ export default function DocumentAdder() {
     const handleClick = ( value : string, input : Array<string>) => {
         setInput((input) => [...input, value ])
 
+
       }
     return (
         <>

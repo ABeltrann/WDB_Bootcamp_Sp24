@@ -1,31 +1,28 @@
 'use server'
 // Replace the uri string with your MongoDB deployment's connection string.
-  import { MongoClient, Timestamp } from "mongodb";
+  import { MongoClient } from "mongodb";
   const uri = "mongodb+srv://beltranalex2005:<2U7pp59AucZk7OIf>@cluster0.ummu5vn.mongodb.net/";
   
   const client = new MongoClient(uri);
-  
-  interface User {
-    id: number;
-    first_name: number;
-    last_name: String;
-    email: String;
-  }
-  interface Doc {
-    // id: number;
-    // user_id: number;
-    // title: String;
-    body: String;
-    // created_at: number;
-  }
-const database = client.db("insertDB");
-const Docs = database.collection<Doc>("mainDocs");
-  async function addDoc( thisBody : String) {
-    try {
 
-      const result = await Docs.insertOne({body : thisBody});
+  interface Haiku {
+    title: string;
+    content: string;
+  }
+  
+  async function run() {
+    try {
+      const database = client.db("insertDB");
+      // Specifying a Schema is optional, but it enables type hints on
+      // finds and inserts
+      const haiku = database.collection<Haiku>("haiku");
+      const result = await haiku.insertOne({
+        title: "Record of a Shriveled Datum",
+        content: "No bytes, no problem. Just insert a document, in MongoDB",
+      });
       console.log(`A document was inserted with the _id: ${result.insertedId}`);
     } finally {
       await client.close();
     }
   }
+  run().catch(console.dir);
