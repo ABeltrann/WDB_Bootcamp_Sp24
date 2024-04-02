@@ -14,9 +14,15 @@ export default function DocumentAdder() {
         <Grid templateColumns='repeat(8, 2fr)' gap={6}>
         <BasicModel input={input}  setInput = {setInput} ></BasicModel>
         {input.map((input)=><TextModal key={1} text={input.value}></TextModal>)}
-        <TextModal text={'loremsiafhdsfhpdsahfdpis'}></TextModal>
+        <TextModal text={'first'}></TextModal>
         </Grid>
     
+
+       <Grid templateColumns='repeat(8, 2fr)' gap={6}>
+       <BasicModel input={input}  setInput = {setInput} ></BasicModel>
+       {input.map((input)=><TextModal key={1} text={input.value}></TextModal>)}
+       <TextModal text={'second'}></TextModal>
+       </Grid>
        </>
     )
 }
