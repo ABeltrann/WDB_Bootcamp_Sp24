@@ -1,13 +1,31 @@
-// import { Doc } from "../docs";
-// import { ObjectId } from "mongodb";
-// import clientPromise from "../../../lib/mongodb";
+import { ObjectId } from "mongodb";
+import clientPromise from "../../../lib/mongodb";
 
-// export const updateDoc = async (doc: Doc): Promise<ObjectId> => {
-//     const mongoClient = await clientPromise;
-//     const response = await mongoClient
-//         .db()
-//         .collection('documents')
-//         .updateOne(doc);
 
-//     return response.insertedId;
-// };
+export default async function handle(req:any, res:any) {
+  if (req.method === 'UPDATE') {
+    try {
+      const client = await clientPromise;
+      const docid = req.body._id;
+      const title = req.body.title;
+      const text = req.body.body;
+
+
+      const response = await client.db("notiom")
+        .collection('documents')
+        .updateOne(
+          { _id: docid },
+          {  body: text, title: title  },
+        );
+      if (response) {
+        res.status(200);
+      } else {
+        res.status(500);
+      }
+    } catch (e :any) {
+      res.status(500);
+    }
+  } else {
+    res.status(500);
+  }
+}

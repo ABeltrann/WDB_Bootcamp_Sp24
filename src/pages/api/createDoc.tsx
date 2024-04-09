@@ -5,8 +5,7 @@ export default async function handle(req:any, res:any) {
   if (req.method === 'POST') {
     try {
       const client = await clientPromise;
-      const db = client.db('notiom');
-      const response = await db
+      const response = await client.db("notiom")
         .collection('documents')
         .insertOne(req.body);
       if (response) {
